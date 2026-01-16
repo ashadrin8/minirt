@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/08 19:27:44 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:24:47 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # define ERROR -1
 # define SUCCESS 0
 
-# define SPACE  
+# define WIDTH 800
+# define HEIGHT 600  
 
 typedef struct	s_color
 {
@@ -38,6 +39,8 @@ typedef struct	s_coordinates
 	double	y;
 	double	z;
 }	t_coordinates;
+
+typedef t_coordinates t_vec3;
 
 typedef struct	s_am_light
 {
