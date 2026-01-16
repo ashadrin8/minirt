@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:52:28 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/08 16:39:48 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:24:10 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int	validate_and_parse(int argc, char **argv, t_scene *scene)
 	while (line != NULL)
 	{
 		trimmed = ft_strtrim(line, " \n\r\t");
-		if (trimmed[0] == '\0')
-			free(trimmed);
-		else
+		if (trimmed[0] != '\0')
 			parse_line(trimmed, scene);
+		free(trimmed);
 		free(line);
 		line = get_next_line(fd);
 	}
