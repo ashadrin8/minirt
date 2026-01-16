@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/15 15:24:47 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/17 00:11:08 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "get_next_line.h"
+
+//# include <MLX42/MLX42.h>
 
 # define ERROR -1
 # define SUCCESS 0
