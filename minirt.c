@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:31:09 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/16 18:16:24 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/16 23:47:03 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int main(int argc, char **argv)
 
 	scene_init(&scene);
 	validate_and_parse(argc, argv, &scene);
+	create_window(&scene);
 	print_scene(&scene);
 
 	return (0);
