@@ -4,7 +4,7 @@
 NAME = miniRT
 NAME_C = minirt.c
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fPIE -Wunreachable-code -Ofast #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fPIE -Wunreachable-code -Ofast #-lm #-fsanitize=address -g
 
 #SHELL := /bin/bash
 #export PATH := /opt/homebrew/bin:/usr/local/bin:$(PATH)
