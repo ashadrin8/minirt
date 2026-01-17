@@ -3,7 +3,13 @@
 
 # include "defines.h"
 
-int32_t		create_window(t_scene *scene);
+typedef struct s_ray
+{
+	t_coordinates origin;
+	t_coordinates direction;
+}	t_ray;
+
+
 void		render_scene(t_scene *scene, mlx_image_t *img);
 
 // utils
