@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/17 10:29:35 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/17 18:32:46 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 # include "libft.h"
 # include "get_next_line.h"
 
@@ -26,7 +27,7 @@
 # define SUCCESS 0
 
 # define WIDTH 800
-# define HEIGHT 600  
+# define HEIGHT 800  
 
 typedef struct	s_color
 {
