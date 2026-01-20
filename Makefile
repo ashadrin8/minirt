@@ -1,60 +1,95 @@
-
-# Universal Makefile for minirt
-NAME = minirt
+# ==============================
+# Project Name
+# ==============================
+NAME = miniRT
 NAME_C = minirt.c
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fPIE
-INCLUDES = -Iincludes -Ilibft/libft -Ilibft/printf -Ilibft/gnl
+CFLAGS = -Wall -Wextra -Werror -fPIE -Wunreachable-code -Ofast #-lm #-fsanitize=address -g
 
-# List all source files (add new files here as needed)
+#SHELL := /bin/bash
+#export PATH := /opt/homebrew/bin:/usr/local/bin:$(PATH)
+
+# ==============================
+# Includes
+# ==============================
+INCLUDES    = -I includes \
+              -I libft/libft \
+              -I libft/printf \
+              -I libft/gnl \
+              -IMLX42/include
+
+# ==============================
+# Sources
+# ==============================
 SRC_FILES = \
+	minirt.c \
 	src/parsing/parsing.c \
 	src/parsing/parse_objects.c \
 	src/parsing/initialization.c \
 	src/parsing/color_parsing.c \
 	src/parsing/coordinates_parsing.c \
 	src/parsing/utils.c \
+	src/render/render_scene.c \
+	src/render/window.c \
+	src/render/utils.c \
 	libft/gnl/get_next_line.c \
 	libft/gnl/get_next_line_utils.c
 
-# Build directory for object files
 BUILD_DIR = build
-
-# Generate object file paths in build/, preserving source structure
 OBJ_FILES = $(SRC_FILES:%.c=$(BUILD_DIR)/%.o)
-
-# List all needed build subdirectories
 BUILD_DIRS = $(sort $(dir $(OBJ_FILES)))
 
-# Static libraries
+# ==============================
+# Libraries
+# ==============================
 LIBFT = libft/libft/libft.a
 PRINTF = libft/printf/printf.a
 
-# Default target
-all: $(NAME)
+LIBMLX      = MLX42
+MLX_BUILD   = $(LIBMLX)/build
+MLX_LIB     = $(MLX_BUILD)/libmlx42.a
+MLX_LIBS    = $(MLX_LIB) -ldl -lglfw -pthread -lm
 
-# Link the executable
-$(NAME): $(LIBFT) $(PRINTF) $(BUILD_DIRS) $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ_FILES) $(NAME_C) $(LIBFT) $(PRINTF) -o $(NAME)
+# ==============================
+# Default target
+# ==============================
+all: libmlx $(NAME)
+
+# ==============================
+# Build project
+# ==============================
+$(NAME): $(LIBFT) $(PRINTF) $(BUILD_DIRS) $(OBJ_FILES) $(MLX_LIB)
+	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) $(PRINTF) $(MLX_LIBS) -o $(NAME)
 	@echo "\033[1;32mBuild complete! 🎉\033[0m"
 
-# Create build subdirectories as needed
+# ==============================
+# Build object files
+# ==============================
 $(BUILD_DIRS):
 	@mkdir -p $@
-
 # Pattern rule: compile any .c file from any subdirectory into build/
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# Build static libraries
+# ==============================
+# Build external libraries
+# ==============================
 $(LIBFT):
 	$(MAKE) -C libft/libft
 
 $(PRINTF):
 	$(MAKE) -C libft/printf
 
-# Clean build artifacts
+# Build MLX42
+libmlx: $(MLX_LIB)
+$(MLX_LIB):
+	cmake $(LIBMLX) -B $(MLX_BUILD)
+	$(MAKE) -C $(MLX_BUILD) -j4
+
+# ==============================
+# Clean
+# ==============================
 clean:
 	rm -rf $(BUILD_DIR)
 	$(MAKE) -C libft/libft clean
@@ -67,4 +102,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libmlx
