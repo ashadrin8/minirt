@@ -34,6 +34,7 @@ SRC_FILES = \
 	src/render/utils.c \
 	src/render/light.c \
 	src/render/sphere.c \
+	src/render/plane.c \
 	libft/gnl/get_next_line.c \
 	libft/gnl/get_next_line_utils.c
 
