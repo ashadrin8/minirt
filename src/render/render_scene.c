@@ -6,26 +6,12 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:32:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/26 14:54:06 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/26 19:20:01 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_internal.h"
 
-/* normalize a vector means:
-Scale it so its length (magnitude) is exactly 1. */
-
-void normalize(t_coordinates *v)
-{
-	double len;
-
-	len = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
-	if (len == 0)
-		return;
-	v->x /= len;
-	v->y /= len;
-	v->z /= len;
-}
 
 t_ray	make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
 {
@@ -46,6 +32,26 @@ t_ray	make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
 	return (ray);
 }
 
+int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
+{
+	double closest;
+
+	hit->type = OBJ_NONE;
+	hit->obj = NULL;
+	closest = 1e30;
+
+	// spheres
+	hit_closest_sphere(ray, scene->spheres, hit, &closest);
+
+	// planes
+	hit_closest_plane(ray, scene->planes, hit, &closest);
+
+	// cylinders
+	// hit_closest_cylinder(ray, scene->cylinders, hit, &closest);
+
+	return (hit->type != OBJ_NONE);
+}
+
 void	render_scene(t_scene *scene, mlx_image_t *img)
 {
 	size_t		x;
@@ -61,7 +67,7 @@ void	render_scene(t_scene *scene, mlx_image_t *img)
 		while (++x < img->width)
 		{
 			ray = make_camera_ray(scene, img, x, y);
-			if (hit_closest_sphere(ray, scene->spheres, &hit))
+			if (hit_closest_object(ray, scene, &hit))
 				color = shade_hit(scene, &hit);
 			else
 				color = (t_color){0, 0, 0};

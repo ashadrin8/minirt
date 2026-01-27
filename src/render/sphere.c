@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 14:44:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/26 14:49:40 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/26 18:55:46 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,34 +66,42 @@ static int hit_sphere(t_ray ray, t_sphere *sphere, double *t_out)
 /* Finds the closest intersected sphere
 Stores a pointer to that exact sphere in hit_sphere */
 
-int hit_closest_sphere(t_ray ray, t_sphere *spheres, t_hit *hit)
+int hit_closest_sphere(t_ray ray, t_sphere *spheres, t_hit *hit, double *closest)
 {
 	double	t;
-	double closest_t;
+	double	closest_t;
+	int		updated;
+	t_sphere	*sphere;
 
-	// veeeeery high number (kinda infinte from our perspective)
-	closest_t = 1e30;
+	closest_t = *closest;
+	updated = 0;
 	while (spheres)
 	{
 		if (hit_sphere(ray, spheres, &t) && t < closest_t)
 		{
 			closest_t = t;
-			hit->sphere = spheres;
-			hit->t = 1;
+			hit->type = OBJ_SPHERE;
+			hit->obj = spheres;
+			hit->t = t;
+			updated = 1;
 		}
 		spheres = spheres->next;
 	}
-	if (closest_t == 1e30)
+	if (!updated)
 		return (0);
 	
-	/* hit point */
+	*closest = closest_t;
+	
+	// hit point
 	hit->point.x = ray.origin.x + hit->t * ray.direction.x;
 	hit->point.y = ray.origin.y + hit->t * ray.direction.y;
 	hit->point.z = ray.origin.z + hit->t * ray.direction.z;
-	/* normal */
-	hit->normal.x = hit->point.x - hit->sphere->center.x;
-	hit->normal.y = hit->point.y - hit->sphere->center.y;
-	hit->normal.z = hit->point.z - hit->sphere->center.z;
+	
+	// normal
+	sphere = (t_sphere *)hit->obj;
+	hit->normal.x = hit->point.x - sphere->center.x;
+	hit->normal.y = hit->point.y - sphere->center.y;
+	hit->normal.z = hit->point.z - sphere->center.z;
 	
 	normalize(&hit->normal);
 	return (1);

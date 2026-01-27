@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 14:47:41 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/26 14:48:49 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/26 19:24:27 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,40 @@ static t_color apply_diffuse(t_color obj, double diff)
 	return out;
 }
 
+static t_color	get_hit_color(t_hit *hit)
+{
+	t_color	out;
+
+	out.red = 0;
+	out.green = 0;
+	out.blue = 0;
+	if (!hit || !hit->obj)
+		return (out);
+	if (hit->type == OBJ_SPHERE)
+		return (((t_sphere *)hit->obj)->color);
+	if (hit->type == OBJ_PLANE)
+		return (((t_plane *)hit->obj)->color);
+/* 	if (hit->type == OBJ_CYLINDER)
+		return (((t_cylinder *)hit->obj)->color); */
+	return (out);
+}
+
 t_color	shade_hit(t_scene *scene, t_hit *hit)
 {
-	t_color	color;
+	t_color	base;
+	t_color	amb;
+	t_color	dif;
+	t_color	out;
 	double	diff;
 
-	color = apply_ambient(hit->sphere->color, scene->ambient);
+	base = get_hit_color(hit);
+	amb = apply_ambient(base, scene->ambient);
 	diff = compute_diffuse(hit, scene->light);
-	color = apply_diffuse(color, diff);
-	return (color);
+	dif = apply_diffuse(base, diff);
+
+	out.red = clamp(amb.red + dif.red);
+	out.green = clamp(amb.green + dif.green);
+	out.blue = clamp(amb.blue + dif.blue);
+	return (out);
 }
+

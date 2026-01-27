@@ -3,6 +3,15 @@
 
 # include "defines.h"
 
+#define EPS 1e-6
+typedef enum e_obj_type
+{
+	OBJ_NONE,
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER
+}	t_obj_type;
+
 typedef struct s_ray
 {
 	t_coordinates origin;
@@ -11,7 +20,8 @@ typedef struct s_ray
 
 typedef struct s_hit
 {
-	t_sphere		*sphere;
+	t_obj_type		type;
+	void			*obj;
 	t_coordinates	point;
 	t_coordinates	normal;
 	double			t;
@@ -20,8 +30,13 @@ typedef struct s_hit
 
 // scene
 void		render_scene(t_scene *scene, mlx_image_t *img);
-void 		normalize(t_coordinates *v);
-int 		hit_closest_sphere(t_ray ray, t_sphere *spheres, t_hit *hit);
+t_ray		make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
+
+// objects
+int			hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit);
+int 		hit_closest_sphere(t_ray ray, t_sphere *spheres, t_hit *hit, double *closest);
+int			hit_closest_plane(t_ray ray, t_plane *planes, t_hit *hit, double *closest);
+// int 			hit_closest_cylinder(ray, scene->cylinders, hit, &closest);
 
 // lights
 t_color		shade_hit(t_scene *scene, t_hit *hit);
@@ -30,5 +45,6 @@ t_color		shade_hit(t_scene *scene, t_hit *hit);
 uint32_t	rgba(int r, int g, int b, int a);
 double 		dot(t_coordinates a, t_coordinates b);
 int 		clamp(int value);
+void 		normalize(t_coordinates *v);
 
 #endif
