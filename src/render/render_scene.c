@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:32:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/26 19:20:01 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/27 20:00:47 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
 
 	hit->type = OBJ_NONE;
 	hit->obj = NULL;
-	closest = 1e30;
+	closest = INF;
 
 	// spheres
 	hit_closest_sphere(ray, scene->spheres, hit, &closest);
@@ -47,7 +47,7 @@ int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
 	hit_closest_plane(ray, scene->planes, hit, &closest);
 
 	// cylinders
-	// hit_closest_cylinder(ray, scene->cylinders, hit, &closest);
+	hit_closest_cylinder(ray, scene->cylinders, hit, &closest);
 
 	return (hit->type != OBJ_NONE);
 }
@@ -76,3 +76,5 @@ void	render_scene(t_scene *scene, mlx_image_t *img)
 		}
 	}
 }
+
+
