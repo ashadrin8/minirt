@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 14:47:41 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/26 19:24:27 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/27 19:48:38 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ static t_color	get_hit_color(t_hit *hit)
 		return (((t_sphere *)hit->obj)->color);
 	if (hit->type == OBJ_PLANE)
 		return (((t_plane *)hit->obj)->color);
-/* 	if (hit->type == OBJ_CYLINDER)
-		return (((t_cylinder *)hit->obj)->color); */
+	if (hit->type == OBJ_CYLINDER)
+		return (((t_cylinder *)hit->obj)->color);
 	return (out);
 }
 
