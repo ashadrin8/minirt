@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/15 15:24:47 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:56:19 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 # include "libft.h"
 # include "get_next_line.h"
+
+# include <MLX42/MLX42.h>
 
 # define ERROR -1
 # define SUCCESS 0
 
 # define WIDTH 800
-# define HEIGHT 600  
+# define HEIGHT 800  
 
 typedef struct	s_color
 {
@@ -108,7 +111,8 @@ typedef struct s_scene
 }	t_scene;
 
 
-void	scene_init(t_scene	*scene);
-int		validate_and_parse(int argc, char **argv, t_scene *scene);
+void		scene_init(t_scene	*scene);
+int			validate_and_parse(int argc, char **argv, t_scene *scene);
+int32_t		create_window(t_scene *scene);
 
 #endif
