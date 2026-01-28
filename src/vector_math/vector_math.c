@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 21:05:49 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/18 21:07:07 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/28 19:01:26 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,14 @@ double	vec_dot(t_vec3 a, t_vec3 b)
 	return (result);
 }
 
-
+//gives a vector perpendicular to both input vectors, with direction 
+// determined by the right-hand rule
+t_vec3	vec_cross(t_vec3 a, t_vec3 b)
+{
+	t_vec3	result;
+	
+	result.x = a.y * b.z - a.z * b.y;
+	result.y = a.z * b.x - a.x * b.z;
+	result.z = a.x * b.y - a.y * b.x;
+	return (result);
+}

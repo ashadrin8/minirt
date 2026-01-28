@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 21:45:35 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/08 17:36:44 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/28 21:14:06 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	validate_store_camera(t_parsing *p, t_scene *scene)
 	}
 	if (p->position == 2)
 	{
-		if (validate_and_store_vector(p->parameter, &scene->camera.vector) == ERROR)
+		if (validate_and_store_vector(p->parameter, &scene->camera.forward) == ERROR)
 			return (printf("oops, error\n"), ERROR);
 	}
 	if (p->position == 3)
