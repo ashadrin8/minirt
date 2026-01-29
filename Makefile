@@ -30,6 +30,7 @@ SRC_FILES = \
 	src/parsing/coordinates_parsing.c \
 	src/parsing/utils.c \
 	src/render/render_scene.c \
+	src/render/camera.c \
 	src/render/window.c \
 	src/render/utils.c \
 	src/render/light.c \
