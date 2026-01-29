@@ -89,6 +89,9 @@ $(PRINTF):
 # Build MLX42
 libmlx: $(MLX_LIB)
 $(MLX_LIB):
+	@if [ ! -d "$(LIBMLX)" ] || [ -z "$$(ls -A $(LIBMLX) 2>/dev/null)" ]; then \
+		git submodule update --init --recursive $(LIBMLX); \
+	fi
 	cmake $(LIBMLX) -B $(MLX_BUILD)
 	$(MAKE) -C $(MLX_BUILD) -j4
 
