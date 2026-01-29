@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:31:09 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/16 23:47:03 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/29 19:22:28 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void print_scene(const t_scene *scene) {
 	// Camera
 	printf("Camera: exists=%d\n", scene->camera.exists);
 	print_coordinates(&scene->camera.coords, "Camera Coords");
-	print_coordinates(&scene->camera.vector, "Camera Vector");
+	print_coordinates(&scene->camera.forward, "Camera Vector");
 	printf("Camera FOV: %d\n", scene->camera.view);
 
 	// Light

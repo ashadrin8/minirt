@@ -38,6 +38,7 @@ SRC_FILES = \
 	src/render/plane.c \
 	src/render/cylinder.c \
 	src/render/vector_utils.c \
+	src/vector_math/vector_math.c \
 	libft/gnl/get_next_line.c \
 	libft/gnl/get_next_line_utils.c
 

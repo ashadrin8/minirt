@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 21:05:49 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/28 19:01:26 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/29 19:45:06 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_vec3	vec_create(double x, double y, double z)
 }
 
 //moving along the ray
-t_vec3	vec_add(t_vec3 a, t_vec3 b)
-{
-	return (vec_create(a.x + b.x, a.y + b.y, a.z + b.z));
-}
+// t_vec3	vec_add(t_vec3 a, t_vec3 b)
+// {
+// 	return (vec_create(a.x + b.x, a.y + b.y, a.z + b.z));
+// }
 
 //ray-to-object calculations, distance checks
 t_vec3	vec_subtract(t_vec3 a, t_vec3 b)
@@ -38,15 +38,15 @@ t_vec3	vec_subtract(t_vec3 a, t_vec3 b)
 //(multiplying each component of a vector by a scalar value)
 // scalar - not a vector, but a single number
 //moving in a direction for a certain number of steps
-t_vec3	vec_scale(t_vec3 vec, double s)
-{
-	t_vec3	result;
+// t_vec3	vec_scale(t_vec3 vec, double s)
+// {
+// 	t_vec3	result;
 
-	result.x = vec.x * s;
-	result.y = vec.y * s;
-	result.z = vec.z * s;
-	return (result);
-}
+// 	result.x = vec.x * s;
+// 	result.y = vec.y * s;
+// 	result.z = vec.z * s;
+// 	return (result);
+// }
 
 //length = sqrt(x² + y² + z²)
 double	vec_length(t_vec3 vec)
@@ -61,17 +61,17 @@ double	vec_length(t_vec3 vec)
 //and making it have length 1 without changing which way it points
 //(so that there's no distance implied and we can operate vectors)
 // applied to ALL vector directions
-t_vec3	vec_normalize(t_vec3 vec)
-{
-	double len;
+// t_vec3	vec_normalize(t_vec3 vec)
+// {
+// 	double len;
 
-	len = vec_length(vec);
-	if (len == 0)
-		return (vec_create(0, 0, 0));
-	//because we can't divide by 0
-	return (vec_scale(vec, 1 / len));
-	// 1 / len - factor that shrinks the vector to length 1
-}
+// 	len = vec_length(vec);
+// 	if (len == 0)
+// 		return (vec_create(0, 0, 0));
+// 	//because we can't divide by 0
+// 	return (vec_scale(vec, 1 / len));
+// 	// 1 / len - factor that shrinks the vector to length 1
+// }
 
 // dot product of two vectors is a number that tells how much 
 //they point in the same direction

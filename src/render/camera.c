@@ -6,12 +6,13 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 18:33:21 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/29 19:07:41 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/29 19:24:42 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector_math.h"
 #include "defines.h"
+#include "render_internal.h"
 
 t_ray	ray_create(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
 {

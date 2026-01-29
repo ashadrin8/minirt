@@ -1,4 +1,4 @@
-#ifndef VECTOR_MATH__H
+#ifndef VECTOR_MATH_H
 # define VECTOR_MATH_H
 
 # include "defines.h"
