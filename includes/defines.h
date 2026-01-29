@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/19 16:56:19 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/28 19:24:54 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,14 @@ typedef struct	s_camera
 {
 	int				exists;
 	t_coordinates	coords;
-	t_coordinates	vector;
+	t_vec3			forward;
+	t_vec3			right;
+	t_vec3			up;
 	int				view;
+
+	t_vec3			horizontal;
+	t_vec3			vertical;
+	t_vec3			llc;
 }	t_camera;
 
 typedef struct	s_light

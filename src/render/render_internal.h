@@ -41,6 +41,10 @@ int				hit_closest_cylinder(t_ray ray, t_cylinder *cylinders, t_hit *hit, double
 // lights
 t_color			shade_hit(t_scene *scene, t_hit *hit);
 
+//camera
+void			camera_prepare_orientation(t_camera	*cam);
+t_ray			ray_create(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
+
 // utils
 uint32_t		rgba(int r, int g, int b, int a);
 double 			dot(t_coordinates a, t_coordinates b);

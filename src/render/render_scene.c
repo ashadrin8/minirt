@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:32:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/27 20:00:47 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/29 19:08:59 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_internal.h"
 
 
-t_ray	make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
-{
-	t_ray	ray;
-	double	u;
-	double	v;
+// t_ray	make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
+// {
+// 	t_ray	ray;
+// 	double	u;
+// 	double	v;
 
-	ray.origin = scene->camera.coords;
+// 	ray.origin = scene->camera.coords;
 
-	u = (2.0 * x / (img->width - 1)) - 1.0;
-	v = 1.0 - (2.0 * y / (img->height - 1));
+// 	u = (2.0 * x / (img->width - 1)) - 1.0;
+// 	v = 1.0 - (2.0 * y / (img->height - 1));
 
-	ray.direction.x = u;
-	ray.direction.y = v;
-	ray.direction.z = 1.0;
-	normalize(&ray.direction);
+// 	ray.direction.x = u;
+// 	ray.direction.y = v;
+// 	ray.direction.z = 1.0;
+// 	normalize(&ray.direction);
 
-	return (ray);
-}
+// 	return (ray);
+// }
 
 int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
 {
@@ -60,13 +60,14 @@ void	render_scene(t_scene *scene, mlx_image_t *img)
 	t_hit		hit;
 	t_color		color;
 
+	camera_prepare_orientation(scene->camera);
 	y = -1;
 	while (++y < img->height)
 	{
 		x = -1;
 		while (++x < img->width)
 		{
-			ray = make_camera_ray(scene, img, x, y);
+			ray = ray_create(scene, img, x, y);
 			if (hit_closest_object(ray, scene, &hit))
 				color = shade_hit(scene, &hit);
 			else
