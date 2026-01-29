@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 14:47:41 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/27 19:48:38 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/01/29 20:15:24 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ t_color	shade_hit(t_scene *scene, t_hit *hit)
 
 	base = get_hit_color(hit);
 	amb = apply_ambient(base, scene->ambient);
+	out = amb;
+	if (!scene->light.exists)
+		return (out);
+	if (is_in_shadow(scene, hit))
+		return (out);
 	diff = compute_diffuse(hit, scene->light);
 	dif = apply_diffuse(base, diff);
 

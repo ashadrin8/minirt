@@ -4,7 +4,7 @@
 # include "defines.h"
 
 #define INF 1e30
-#define EPS 1e-6
+#define EPS 1e-4
 typedef enum e_obj_type
 {
 	OBJ_NONE,
@@ -29,8 +29,8 @@ typedef struct s_hit
 }	t_hit;
 
 // scene
-void		render_scene(t_scene *scene, mlx_image_t *img);
-t_ray		make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
+void			render_scene(t_scene *scene, mlx_image_t *img);
+t_ray			make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
 
 // objects
 int				hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit);
@@ -40,6 +40,7 @@ int				hit_closest_cylinder(t_ray ray, t_cylinder *cylinders, t_hit *hit, double
 
 // lights
 t_color			shade_hit(t_scene *scene, t_hit *hit);
+int				is_in_shadow(t_scene *scene, t_hit *hit);	
 
 //camera
 void			camera_prepare_orientation(t_camera	*cam);
