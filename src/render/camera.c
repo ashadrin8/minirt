@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 18:33:21 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/29 19:24:42 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:32:00 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void	view_plane_calc(t_camera *cam)
 	double	vp_width;
 	t_vec3	lower_left_corner;
 	double	focal_length;
+	double	theta;
 
 	focal_length = 1.0;
 	aspect_ratio = (double)WIDTH / (double)HEIGHT;
-	vp_height = 2 * tan(cam->view / 2);
+	theta = cam->view * M_PI / 180.0;
+	vp_height = 2 * tan(theta / 2);
 	vp_width = aspect_ratio * vp_height;
 	cam->vertical = vec_scale(cam->up, vp_height);
 	cam->horizontal = vec_scale(cam->right, vp_width);
