@@ -34,6 +34,7 @@ SRC_FILES = \
 	src/render/window.c \
 	src/render/utils.c \
 	src/render/light.c \
+	src/render/shadow.c \
 	src/render/sphere.c \
 	src/render/plane.c \
 	src/render/cylinder.c \
