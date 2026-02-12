@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:29:03 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/12 15:46:11 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:38:09 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	resizing(int32_t width, int32_t height, void *con)
 	render_scene(ctx->scene, ctx->img);
 }
 
-void	escaping(mlx_key_data_t keydata, void *con)
+void	keys(mlx_key_data_t keydata, void *con)
 {
 	t_mlx_context	*ctx;
 
@@ -60,6 +60,21 @@ void	escaping(mlx_key_data_t keydata, void *con)
 	if (keydata.key == MLX_KEY_ESCAPE 
 			&& keydata.action == MLX_PRESS)
 	mlx_close_window(ctx->mlx);
+	else if (keydata.key == MLX_KEY_UP
+			&& keydata.action == MLX_PRESS)
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.right, 0.05);
+	else if (keydata.key == MLX_KEY_DOWN
+			&& keydata.action == MLX_PRESS)
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.right, -0.05);
+	else if (keydata.key == MLX_KEY_RIGHT
+			&& keydata.action == MLX_PRESS)
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.up, 0.05);
+	else if (keydata.key == MLX_KEY_LEFT
+			&& keydata.action == MLX_PRESS)
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.up, -0.05); 
+	camera_prepare_orientation(&ctx->scene->camera, ctx->img);
+	render_scene(ctx->scene, ctx->img);
+	
 }
 
 void	closing(void *con)
@@ -87,7 +102,7 @@ int32_t	create_window(t_scene *scene)
 
 	render_scene(scene, img);
 	mlx_resize_hook(mlx, resizing, &con);
-	mlx_key_hook(mlx, escaping, &con);
+	mlx_key_hook(mlx, keys, &con);
 	mlx_close_hook(mlx, closing, &con);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!

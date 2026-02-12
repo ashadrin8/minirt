@@ -2,6 +2,7 @@
 # define RENDER_INTERNAL_H
 
 # include "defines.h"
+# include "vector_math.h"
 
 #define INF 1e30
 #define EPS 1e-4
@@ -40,7 +41,7 @@ typedef struct	s_mlx_context {
 
 // scene
 void			render_scene(t_scene *scene, mlx_image_t *img);
-t_ray			make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
+// t_ray		make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
 
 // objects
 int				hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit);
