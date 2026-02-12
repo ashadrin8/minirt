@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:29:03 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/12 18:38:09 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:39:28 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,3 @@ int32_t	create_window(t_scene *scene)
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
-
-
-//The management of your window must remain fluid: switching to another window,
-//minimization, etc.
-
-// • The program displays the image in a window and respects the following rules:
-// ◦ Pressing ESC must close the window and quit the program cleanly.
-// ◦ Clicking on the red cross on the window frame must close the window and quit
-// the program cleanly.
-// ◦ The use of images from the minilibX library is strongly recommended.
