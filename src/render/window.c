@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:29:03 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/12 14:59:56 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/12 15:46:11 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,31 @@ void	resizing(int32_t width, int32_t height, void *con)
 	render_scene(ctx->scene, ctx->img);
 }
 
+void	escaping(mlx_key_data_t keydata, void *con)
+{
+	t_mlx_context	*ctx;
+
+	ctx = (t_mlx_context *)con;
+	if (keydata.key == MLX_KEY_ESCAPE 
+			&& keydata.action == MLX_PRESS)
+	mlx_close_window(ctx->mlx);
+}
+
+void	closing(void *con)
+{
+	t_mlx_context	*ctx;
+
+	ctx = (t_mlx_context *)con;
+	mlx_close_window(ctx->mlx);
+}
+
 int32_t	create_window(t_scene *scene)
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	t_mlx_context	con;
 
-	mlx_set_setting(MLX_MAXIMIZED, true);
+	// mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (!mlx)
 	ft_error();
@@ -67,9 +85,10 @@ int32_t	create_window(t_scene *scene)
 	ft_error();
 	context_init(mlx, img, scene, &con);
 
-	mlx_resize_hook(mlx, resizing, &con);
 	render_scene(scene, img);
-
+	mlx_resize_hook(mlx, resizing, &con);
+	mlx_key_hook(mlx, escaping, &con);
+	mlx_close_hook(mlx, closing, &con);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, mlx);
