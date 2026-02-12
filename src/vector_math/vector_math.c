@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 21:05:49 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/29 19:45:06 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:20:45 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,23 @@ t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 	result.y = a.z * b.x - a.x * b.z;
 	result.z = a.x * b.y - a.y * b.x;
 	return (result);
+}
+
+//rotates a vector around a given axis by a specified angle 
+//(in radians)
+//used for changing the camera view
+t_vec3	vec_rotate(t_vec3 v, t_vec3 axis, double angle)
+{
+    double	cos_theta;
+    double	sin_theta;
+	t_vec3	term1;
+	t_vec3	term2;
+	t_vec3	term3;
+
+	cos_theta = cos(angle);
+	sin_theta = sin(angle);
+    term1 = vec_scale(v, cos_theta);
+    term2 = vec_scale(vec_cross(axis, v), sin_theta);
+    term3 = vec_scale(axis, vec_dot(axis, v) * (1 - cos_theta));
+    return vec_add(vec_add(term1, term2), term3);
 }

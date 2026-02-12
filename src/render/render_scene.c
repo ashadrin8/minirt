@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:32:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/29 19:23:17 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:59:19 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	render_scene(t_scene *scene, mlx_image_t *img)
 	t_hit		hit;
 	t_color		color;
 
-	camera_prepare_orientation(&scene->camera);
+	camera_prepare_orientation(&scene->camera, img);
 	y = -1;
 	while (++y < img->height)
 	{

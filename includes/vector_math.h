@@ -12,5 +12,6 @@ double	vec_length(t_vec3 vec);
 t_vec3	vec_normalize(t_vec3 vec);
 double	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
+t_vec3	vec_rotate(t_vec3 v, t_vec3 axis, double angle);
 
 #endif

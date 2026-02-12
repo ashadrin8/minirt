@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/28 19:24:54 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:32:43 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 
 # define WIDTH 800
 # define HEIGHT 800  
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 typedef struct	s_color
 {
