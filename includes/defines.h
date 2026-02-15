@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/30 15:32:43 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/15 20:40:08 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,31 @@ struct	s_cylinder
 	t_cylinder		*next;
 };
 
+typedef struct  s_cone t_cone;
+struct  s_cone
+{
+    t_coordinates   apex;
+    t_vec3          axis;
+    double          height;
+    double          diameter;
+    double          radius;
+    double          slope;
+    t_cone          *next;
+}; 
+
+typedef struct  c_cone_hit
+{
+    t_vec3  oc;
+    double  m;
+    double  n;
+    double  A;
+    double  B;
+    double  C;
+    double  discriminant;
+    double  t0;
+    double  t1;
+}   t_cone_hit;
+
 typedef struct s_scene
 {
 	t_am_light	ambient;
@@ -118,6 +143,7 @@ typedef struct s_scene
 	t_plane		*last_plane;
 	t_cylinder	*cylinders;
 	t_cylinder	*last_cylinder;
+	t_cone
 }	t_scene;
 
 
