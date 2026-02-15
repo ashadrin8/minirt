@@ -30,9 +30,19 @@ typedef struct s_hit
 	double			t;
 }	t_hit;
 
+
+//mlx
+typedef struct	s_mlx_context {
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_scene		*scene;
+	size_t		width;
+	size_t		height;
+}	t_mlx_context;
+
 // scene
 void			render_scene(t_scene *scene, mlx_image_t *img);
-// t_ray			make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
+// t_ray		make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
 
 // objects
 int				hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit);
@@ -46,20 +56,11 @@ t_color			shade_hit(t_scene *scene, t_hit *hit);
 int				is_in_shadow(t_scene *scene, t_hit *hit);	
 
 //camera
-void			camera_prepare_orientation(t_camera	*cam);
+void			camera_prepare_orientation(t_camera	*cam, mlx_image_t *img);
 t_ray			ray_create(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
 
 // utils
 uint32_t		rgba(int r, int g, int b, int a);
-double 			dot(t_coordinates a, t_coordinates b);
 int 			clamp(int value);
-void 			normalize(t_coordinates *v);
-
-// vector utils
-t_coordinates	vec_sub(t_coordinates a, t_coordinates b);
-t_coordinates	vec_add(t_coordinates a, t_coordinates b);
-t_coordinates	vec_scale(t_coordinates v, double s);
-t_coordinates	vec_normalize(t_coordinates v);
-t_coordinates	ray_at(t_ray ray, double t);
 
 #endif

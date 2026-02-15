@@ -18,7 +18,7 @@ static int	hit_plane(t_ray ray, t_plane *pl, double *t_out)
 	double t;
 	t_coordinates p0o;
 
-	denom = dot(ray.direction, pl->vector);
+	denom = vec_dot(ray.direction, pl->vector);
 	if (fabs(denom) < EPS)
 		return (0);
 
@@ -26,7 +26,7 @@ static int	hit_plane(t_ray ray, t_plane *pl, double *t_out)
 	p0o.y = pl->point.y - ray.origin.y;
 	p0o.z = pl->point.z - ray.origin.z;
 
-	t = dot(p0o, pl->vector) / denom;
+	t = vec_dot(p0o, pl->vector) / denom;
 	if (t <= EPS)
 		return (0);
 
@@ -50,8 +50,8 @@ int	hit_closest_plane(t_ray ray, t_plane *planes, t_hit *hit, double *closest)
 			hit->point.y = ray.origin.y + t * ray.direction.y;
 			hit->point.z = ray.origin.z + t * ray.direction.z;
 			hit->normal = planes->vector;
-			normalize(&hit->normal);
-			if (dot(hit->normal, ray.direction) > 0)
+			hit->normal = vec_normalize(hit->normal);
+			if (vec_dot(hit->normal, ray.direction) > 0)
 			{
 				hit->normal.x *= -1;
 				hit->normal.y *= -1;
@@ -62,4 +62,3 @@ int	hit_closest_plane(t_ray ray, t_plane *planes, t_hit *hit, double *closest)
 	}
 	return (hit->type != OBJ_NONE);
 }
-
