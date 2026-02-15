@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/15 20:40:08 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:09:54 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ struct  s_cone
     double          diameter;
     double          radius;
     double          slope;
+	t_color			color;
     t_cone          *next;
 }; 
 
@@ -143,7 +144,8 @@ typedef struct s_scene
 	t_plane		*last_plane;
 	t_cylinder	*cylinders;
 	t_cylinder	*last_cylinder;
-	t_cone
+	t_cone		*cones;
+	t_cone		*last_cone;
 }	t_scene;
 
 

@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:32:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/29 19:23:17 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:18:29 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
 
 	// cylinders
 	hit_closest_cylinder(ray, scene->cylinders, hit, &closest);
+	hit_closest_cone(ray, scene->cones, hit, &closest);
 
 	return (hit->type != OBJ_NONE);
 }

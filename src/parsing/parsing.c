@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:52:28 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/16 18:24:10 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 00:00:22 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse_line(char *line, t_scene *scene)
 		p.tot_pars = 3;
 		return (parse_general(line, scene, &p));
 	}
-	if (!ft_strncmp(line, "pl ", 3) || !ft_strncmp(line, "sp ", 3) || !ft_strncmp(line, "cy ", 3))
+	if (!ft_strncmp(line, "pl ", 3) || !ft_strncmp(line, "sp ", 3) || !ft_strncmp(line, "cy ", 3) || !ft_strncmp(line, "co ", 3))
 		return (manage_geometric(line, scene, &p));
 	return (ERROR);
 }
@@ -89,6 +89,14 @@ int	manage_geometric(char *line, t_scene *scene, t_parsing *p)
 		if (cylinder_create(scene) == ERROR)
 			return (ERROR);
 		p->validate_store = &validate_store_cylinder;
+		p->tot_pars = 5;
+		return (parse_general(line, scene, p));
+	}
+	if (ft_strncmp(line, "co ", 3) == 0)
+	{
+		if (cone_create(scene) == ERROR)
+			return (ERROR);
+		p->validate_store = &validate_store_cone;
 		p->tot_pars = 5;
 		return (parse_general(line, scene, p));
 	}
