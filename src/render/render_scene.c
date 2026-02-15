@@ -29,6 +29,7 @@ int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
 
 	// cylinders
 	hit_closest_cylinder(ray, scene->cylinders, hit, &closest);
+	hit_closest_cone(ray, scene->cones, hit, &closest);
 
 	return (hit->type != OBJ_NONE);
 }

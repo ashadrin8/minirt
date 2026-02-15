@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 21:49:06 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/07 22:42:58 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:52:23 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ int		validate_store_light(t_parsing *p, t_scene *scene);
 int		validate_store_sphere(t_parsing *p, t_scene *scene);
 int		validate_store_plane(t_parsing *p, t_scene *scene);
 int		validate_store_cylinder(t_parsing *p, t_scene *scene);
+int		validate_store_cone(t_parsing *p, t_scene *scene);
 
 //init
 void	scene_init(t_scene	*scene);
 int		plane_create(t_scene *scene);
 int		sphere_create(t_scene *scene);
 int		cylinder_create(t_scene *scene);
+int		cone_create(t_scene *scene);
 
 //utils
 int		is_valid_rt(char *filename);
