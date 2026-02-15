@@ -13,25 +13,6 @@
 #include "render_internal.h"
 
 
-// t_ray	make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
-// {
-// 	t_ray	ray;
-// 	double	u;
-// 	double	v;
-
-// 	ray.origin = scene->camera.coords;
-
-// 	u = (2.0 * x / (img->width - 1)) - 1.0;
-// 	v = 1.0 - (2.0 * y / (img->height - 1));
-
-// 	ray.direction.x = u;
-// 	ray.direction.y = v;
-// 	ray.direction.z = 1.0;
-// 	normalize(&ray.direction);
-
-// 	return (ray);
-// }
-
 int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
 {
 	double closest;
@@ -77,5 +58,4 @@ void	render_scene(t_scene *scene, mlx_image_t *img)
 		}
 	}
 }
-
 
