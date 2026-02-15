@@ -47,9 +47,9 @@ static int hit_sphere(t_ray ray, t_sphere *sphere, double *t_out)
 	oc.y = ray.origin.y - sphere->center.y;
 	oc.z = ray.origin.z - sphere->center.z;
 
-	a = dot(ray.direction, ray.direction);
-	b = 2.0 * dot(oc, ray.direction);
-	c = dot(oc, oc) - (sphere->diameter * sphere->diameter / 4.0);
+	a = vec_dot(ray.direction, ray.direction);
+	b = 2.0 * vec_dot(oc, ray.direction);
+	c = vec_dot(oc, oc) - (sphere->diameter * sphere->diameter / 4.0);
 
 	// intersection math
 	intersect = b * b - 4 * a * c;
@@ -103,6 +103,6 @@ int hit_closest_sphere(t_ray ray, t_sphere *spheres, t_hit *hit, double *closest
 	hit->normal.y = hit->point.y - sphere->center.y;
 	hit->normal.z = hit->point.z - sphere->center.z;
 	
-	normalize(&hit->normal);
+	hit->normal = vec_normalize(hit->normal);
 	return (1);
 }

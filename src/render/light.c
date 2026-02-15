@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 14:47:41 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/29 20:15:24 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/15 20:33:09 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static double	compute_diffuse(t_hit *hit, t_light light)
 	light_dir.x = light.coords.x - hit->point.x;
 	light_dir.y = light.coords.y - hit->point.y;
 	light_dir.z = light.coords.z - hit->point.z;
-	normalize(&light_dir);
+	light_dir = vec_normalize(light_dir);
 
-	diff = dot(hit->normal, light_dir);
+	diff = vec_dot(hit->normal, light_dir);
 	if (diff < 0)
 		return (0);
 
@@ -100,4 +100,3 @@ t_color	shade_hit(t_scene *scene, t_hit *hit)
 	out.blue = clamp(amb.blue + dif.blue);
 	return (out);
 }
-
