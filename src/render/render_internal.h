@@ -6,7 +6,7 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 10:00:00 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/17 00:00:27 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 00:09:23 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,34 @@
 # define INF 1e30
 # define EPS 1e-4
 
+typedef enum e_obj_type
+{
+	OBJ_NONE,
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER
+}	t_obj_type;
+typedef struct s_sphere_eq
+{
+	t_coordinates	oc;
+	double			a;
+	double			b;
+	double			c;
+	double			disc;
+	double			t0;
+	double			t1;
+}	t_sphere_eq;
 typedef struct s_cap_hit
 {
 	int		hit;
 	double	t;
 }	t_cap_hit;
-
 typedef struct s_cyl_hits
 {
 	t_cap_hit	cap0;
 	t_cap_hit	cap1;
 	double		closest_t;
 }	t_cyl_hits;
-
 typedef struct s_side_eq
 {
 	t_coordinates	axis;
@@ -43,20 +58,11 @@ typedef struct s_side_eq
 	double			t0;
 	double			t1;
 }	t_side_eq;
-typedef enum e_obj_type
-{
-	OBJ_NONE,
-	OBJ_SPHERE,
-	OBJ_PLANE,
-	OBJ_CYLINDER
-}	t_obj_type;
-
 typedef struct s_ray
 {
 	t_coordinates	origin;
 	t_coordinates	direction;
 }	t_ray;
-
 typedef struct s_hit
 {
 	t_obj_type		type;
@@ -65,7 +71,6 @@ typedef struct s_hit
 	t_coordinates	normal;
 	double			t;
 }	t_hit;
-
 typedef struct s_shadow_ctx
 {
 	t_ray			shadow;
@@ -75,7 +80,6 @@ typedef struct s_shadow_ctx
 	double			light_dist2;
 	double			traveled;
 }	t_shadow_ctx;
-
 typedef struct s_mlx_context
 {
 	mlx_t		*mlx;

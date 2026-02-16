@@ -6,39 +6,47 @@
 /*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 14:44:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/26 18:55:46 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 00:09:32 by chiarakappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_internal.h"
 
+static void	setup_sphere_eq(t_ray ray, t_sphere *sphere, t_sphere_eq *eq)
+{
+	eq->oc.x = ray.origin.x - sphere->center.x;
+	eq->oc.y = ray.origin.y - sphere->center.y;
+	eq->oc.z = ray.origin.z - sphere->center.z;
+	eq->a = vec_dot(ray.direction, ray.direction);
+	eq->b = 2.0 * vec_dot(eq->oc, ray.direction);
+	eq->c = vec_dot(eq->oc, eq->oc) - (sphere->diameter * sphere->diameter
+			/ 4.0);
+}
+
+static int	solve_sphere_eq(t_sphere_eq *eq)
+{
+	double	sqrt_disc;
+
+	eq->disc = eq->b * eq->b - 4.0 * eq->a * eq->c;
+	if (eq->disc < 0.0)
+		return (0);
+	sqrt_disc = sqrt(eq->disc);
+	eq->t0 = (-eq->b - sqrt_disc) / (2.0 * eq->a);
+	eq->t1 = (-eq->b + sqrt_disc) / (2.0 * eq->a);
+	return (1);
+}
+
 static int	hit_sphere(t_ray ray, t_sphere *sphere, double *t_out)
 {
-	t_coordinates	oc;
-	double			a;
-	double			b;
-	double			c;
-	double			intersect;
-	double			sqrt_disc;
-	double			t0;
-	double			t1;
+	t_sphere_eq	eq;
 
-	oc.x = ray.origin.x - sphere->center.x;
-	oc.y = ray.origin.y - sphere->center.y;
-	oc.z = ray.origin.z - sphere->center.z;
-	a = vec_dot(ray.direction, ray.direction);
-	b = 2.0 * vec_dot(oc, ray.direction);
-	c = vec_dot(oc, oc) - (sphere->diameter * sphere->diameter / 4.0);
-	intersect = b * b - 4 * a * c;
-	if (intersect < 0)
+	setup_sphere_eq(ray, sphere, &eq);
+	if (!solve_sphere_eq(&eq))
 		return (0);
-	sqrt_disc = sqrt(intersect);
-	t0 = (-b - sqrt_disc) / (2 * a);
-	t1 = (-b + sqrt_disc) / (2 * a);
-	if (t0 > EPS)
-		*t_out = t0;
-	else if (t1 > EPS)
-		*t_out = t1;
+	if (eq.t0 > EPS)
+		*t_out = eq.t0;
+	else if (eq.t1 > EPS)
+		*t_out = eq.t1;
 	else
 		return (0);
 	return (1);
