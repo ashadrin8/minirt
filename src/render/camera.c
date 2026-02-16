@@ -68,3 +68,19 @@ void	camera_prepare_orientation(t_camera	*cam, mlx_image_t *img)
 	cam->up = up;
 	view_plane_calc(cam, img);
 }
+
+void	handle_camera_rotation(mlx_key_data_t keydata, t_scene *scene)
+{
+	if (keydata.key == MLX_KEY_UP)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.right, 0.05);
+	else if (keydata.key == MLX_KEY_DOWN)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.right, -0.05);
+	else if (keydata.key == MLX_KEY_RIGHT)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.up, 0.05);
+	else if (keydata.key == MLX_KEY_LEFT)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.up, -0.05);
+}
