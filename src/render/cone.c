@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 18:58:42 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/16 14:43:28 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 23:06:18 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	hit_cone_base(t_ray ray, t_cone *cone, t_vec3 axis, double *t_out)
 	t_coordinates	base_center;
 	double			denom;
 	double			t;
-	t_coordinates	P;
+	t_coordinates	p;
 	t_vec3			v;
-	
+
 	base_center = vec_add(cone->apex, vec_scale(axis, cone->height));
 	denom = vec_dot(ray.direction, axis);
 	if (fabs(denom) <= EPS)
@@ -27,47 +27,27 @@ int	hit_cone_base(t_ray ray, t_cone *cone, t_vec3 axis, double *t_out)
 	t = vec_dot(vec_subtract(base_center, ray.origin), axis) / denom;
 	if (t <= EPS)
 		return (0);
-	P = vec_add(ray.origin, vec_scale(ray.direction, t));
-	v = vec_subtract(P, base_center);
+	p = vec_add(ray.origin, vec_scale(ray.direction, t));
+	v = vec_subtract(p, base_center);
 	if (vec_dot(v, v) > (cone->radius * cone->radius))
 		return (0);
 	*t_out = t;
 	return (1);
 }
 
-int	estimate_ts(t_cone_hit *hit, double *t_out)
+static int	hit_cone_side(t_ray ray, t_cone *cone,
+	t_coordinates axis, double *t_out)
 {
-	if (hit->t0 < 0)
-	{
-		if (hit->t1 < 0)
-			return (0);
-		*t_out = hit->t1;
-		return (1);
-	}
-	if (hit->t1 < 0)
-	{
-		*t_out = hit->t0;
-		return (1);
-	}   
-	if (hit->t0 < hit->t1)
-	{
-		*t_out = hit->t0;
-		return (1);
-	}
-	*t_out = hit->t1;
-	return (1);
-}
-
-static int 	hit_cone_side(t_ray ray, t_cone *cone, t_coordinates axis, double *t_out)
-{
-	t_cone_hit  hit;
+	t_cone_hit	hit;
 	double		m;
 
 	hit.oc = vec_subtract(ray.origin, cone->apex);
 	hit.m = vec_dot(ray.direction, axis);
 	hit.n = vec_dot(hit.oc, axis);
-	hit.A = vec_dot(ray.direction, ray.direction) - (1 + cone->slope) * hit.m * hit.m;
-	hit.B = 2 * (vec_dot(ray.direction, hit.oc) - (1 + cone->slope) * hit.m * hit.n);
+	hit.A = vec_dot(ray.direction, ray.direction)
+		- (1 + cone->slope) * hit.m * hit.m;
+	hit.B = 2 * (vec_dot(ray.direction, hit.oc)
+			- (1 + cone->slope) * hit.m * hit.n);
 	hit.C = vec_dot(hit.oc, hit.oc) - (1 + cone->slope) * hit.n * hit.n;
 	hit.discriminant = hit.B * hit.B - 4 * hit.A * hit.C;
 	if (hit.discriminant < 0)
@@ -82,24 +62,26 @@ static int 	hit_cone_side(t_ray ray, t_cone *cone, t_coordinates axis, double *t
 			return (0);
 		return (1);
 	}
-    return (0);
+	return (0);
 }
 
-t_coordinates	cone_side_normal(t_ray ray, t_cone *cone, t_coordinates axis, double t)
+t_coordinates	cone_side_normal(t_ray ray, t_cone *cone,
+	t_coordinates axis, double t)
 {
-	t_coordinates	P;
+	t_coordinates	p;
 	t_vec3			v;
 	t_coordinates	proj;
 	t_vec3			normal;
 
-	P = ray_at(ray, t);
-	v = vec_subtract(P, cone->apex);
+	p = ray_at(ray, t);
+	v = vec_subtract(p, cone->apex);
 	proj = vec_scale(axis, vec_dot(v, axis));
 	normal = vec_subtract(v, proj);
 	return (vec_normalize(normal));
 }
 
-static int	hit_cone(t_ray ray, t_cone *cone, double *t_out, t_coordinates *n_out)
+static int	hit_cone(t_ray ray, t_cone *cone, double *t_out,
+	t_coordinates *n_out)
 {
 	t_coordinates	axis;
 	double			t_side;

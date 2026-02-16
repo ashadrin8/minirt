@@ -40,6 +40,16 @@ typedef struct	s_mlx_context {
 	size_t		height;
 }	t_mlx_context;
 
+typedef struct s_camera_calc
+{
+	double	aspect_ratio;
+	double	vp_height;
+	double	vp_width;
+	t_vec3	lower_left_corner;
+	double	focal_length;
+	double	theta;
+}	t_camera_calc;
+
 // scene
 void			render_scene(t_scene *scene, mlx_image_t *img);
 // t_ray		make_camera_ray(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
@@ -63,5 +73,6 @@ t_ray			ray_create(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
 uint32_t		rgba(int r, int g, int b, int a);
 int 			clamp(int value);
 t_coordinates	ray_at(t_ray ray, double t);
+int				estimate_ts(t_cone_hit *hit, double *t_out);
 
 #endif
