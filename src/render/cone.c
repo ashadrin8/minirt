@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 18:58:42 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/15 22:53:20 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:22:40 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int	hit_cone_base(t_ray ray, t_cone *cone, t_vec3 axis, double *t_out)
 	t_vec3			v;
 	
 	base_center = vec_add(cone->apex, vec_scale(axis, cone->height));
-	denom = dot(ray.direction, axis);
+	denom = vec_dot(ray.direction, axis);
 	if (fabs(denom) <= EPS)
 		return (0);
-	t = dot(vec_subtract(base_center, ray.origin), axis) / denom;
+	t = vec_dot(vec_subtract(base_center, ray.origin), axis) / denom;
 	if (t <= EPS)
 		return (0);
 	P = vec_add(ray.origin, vec_scale(ray.direction, t));
 	v = vec_subtract(P, base_center);
-	if (dot(v, v) > (cone->radius * cone->radius))
+	if (vec_dot(v, v) > (cone->radius * cone->radius))
 		return (0);
 	*t_out = t;
 	return (1);
@@ -65,9 +65,9 @@ static int  hit_cone_side(t_ray ray, t_cone *cone, t_coordinates axis, double *t
     hit.oc = vec_subtract(ray.origin, cone->apex);
     hit.m = vec_dot(ray.direction, axis);
     hit.n = vec_dot(hit.oc, axis);
-    hit.A = dot(ray.direction, ray.direction) - (1 + cone->slope) * hit.m * hit.m;
-    hit.B = 2 * (dot(ray.direction, hit.oc) - (1 + cone->slope) * hit.m * hit.n);
-    hit.C = dot(hit.oc, hit.oc) - (1 + cone->slope) * hit.n * hit.n;
+    hit.A = vec_dot(ray.direction, ray.direction) - (1 + cone->slope) * hit.m * hit.m;
+    hit.B = 2 * (vec_dot(ray.direction, hit.oc) - (1 + cone->slope) * hit.m * hit.n);
+    hit.C = vec_dot(hit.oc, hit.oc) - (1 + cone->slope) * hit.n * hit.n;
     hit.discriminant = hit.B * hit.B - 4 * hit.A * hit.C;
     if (hit.discriminant < 0)
         return (0);
@@ -87,7 +87,7 @@ t_coordinates	cone_side_normal(t_ray ray, t_cone *cone, t_coordinates axis, doub
 
 	P = ray_at(ray, t);
 	v = vec_subtract(P, cone->apex);
-	proj = vec_scale(axis, dot(v, axis));
+	proj = vec_scale(axis, vec_dot(v, axis));
 	normal = vec_subtract(v, proj);
 	return (vec_normalize(normal));
 }
@@ -136,7 +136,7 @@ int	hit_closest_cone(t_ray ray, t_cone *cones, t_hit *hit, double *closest)
 			hit->t = t;
 			hit->point = ray_at(ray, t);
 			hit->normal = n;
-			if (dot(hit->normal, ray.direction) > 0)
+			if (vec_dot(hit->normal, ray.direction) > 0)
 				hit->normal = vec_scale(hit->normal, -1.0);
 		}
 		cones = cones->next;

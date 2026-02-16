@@ -62,5 +62,6 @@ t_ray			ray_create(t_scene *scene, mlx_image_t *img, size_t x, size_t y);
 // utils
 uint32_t		rgba(int r, int g, int b, int a);
 int 			clamp(int value);
+t_coordinates	ray_at(t_ray ray, double t);
 
 #endif

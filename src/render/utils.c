@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:35:24 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/15 20:30:58 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/16 14:21:39 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,9 @@ int clamp(int value)
 	if (value > 255)
 		return 255;
 	return value;
+}
+
+t_coordinates	ray_at(t_ray ray, double t)
+{
+	return (vec_add(ray.origin, vec_scale(ray.direction, t)));
 }
