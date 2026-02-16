@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/15 23:09:54 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:32:18 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct  c_cone_hit
     double  discriminant;
     double  t0;
     double  t1;
+	t_vec3	P;
 }   t_cone_hit;
 
 typedef struct s_scene
