@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/16 16:49:59 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:12:56 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ typedef struct s_scene
 	t_cone		*cones;
 	t_cone		*last_cone;
 }	t_scene;
-
 
 void		scene_init(t_scene	*scene);
 int			validate_and_parse(int argc, char **argv, t_scene *scene);
