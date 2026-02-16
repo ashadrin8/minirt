@@ -17,11 +17,11 @@ uint32_t	rgba(int r, int g, int b, int a)
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-int clamp(int value)
+int	clamp(int value)
 {
 	if (value < 0)
-		return 0;
+		return (0);
 	if (value > 255)
-		return 255;
-	return value;
+		return (255);
+	return (value);
 }

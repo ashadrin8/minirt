@@ -27,14 +27,12 @@ int	is_in_shadow(t_scene *scene, t_hit *hit)
 	light_dir = vec_normalize(light_dir);
 	shadow.origin = vec_add(hit->point, vec_scale(hit->normal, (EPS * 10)));
 	shadow.direction = light_dir;
-	
 	tmp.type = OBJ_NONE;
 	tmp.obj = NULL;
 	closest = INF;
 	hit_closest_sphere(shadow, scene->spheres, &tmp, &closest);
 	hit_closest_plane(shadow, scene->planes, &tmp, &closest);
 	hit_closest_cylinder(shadow, scene->cylinders, &tmp, &closest);
-	
 	if (tmp.type == OBJ_NONE)
 		return (0);
 	return ((closest * closest) < light_dist2);

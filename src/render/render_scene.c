@@ -12,24 +12,16 @@
 
 #include "render_internal.h"
 
-
 int	hit_closest_object(t_ray ray, t_scene *scene, t_hit *hit)
 {
-	double closest;
+	double	closest;
 
 	hit->type = OBJ_NONE;
 	hit->obj = NULL;
 	closest = INF;
-
-	// spheres
 	hit_closest_sphere(ray, scene->spheres, hit, &closest);
-
-	// planes
 	hit_closest_plane(ray, scene->planes, hit, &closest);
-
-	// cylinders
 	hit_closest_cylinder(ray, scene->cylinders, hit, &closest);
-
 	return (hit->type != OBJ_NONE);
 }
 
@@ -58,4 +50,3 @@ void	render_scene(t_scene *scene, mlx_image_t *img)
 		}
 	}
 }
-

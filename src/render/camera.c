@@ -20,12 +20,12 @@ t_ray	ray_create(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
 	double	u;
 	double	v;
 	t_vec3	point_on_plane;
-	
+
 	ray.origin = scene->camera.coords;
 	u = (double)x / (img->width - 1);
 	v = (double)y / (img->height - 1);
-	point_on_plane = vec_add(vec_add(scene->camera.llc, 
-		vec_scale(scene->camera.horizontal, u)), 
+	point_on_plane = vec_add(vec_add(scene->camera.llc,
+		vec_scale(scene->camera.horizontal, u)),
 		vec_scale(scene->camera.vertical, v));
 	ray.direction = vec_normalize(vec_subtract(point_on_plane, scene->camera.coords));
 	
@@ -48,7 +48,7 @@ void	view_plane_calc(t_camera *cam, mlx_image_t *img)
 	vp_width = aspect_ratio * vp_height;
 	cam->vertical = vec_scale(cam->up, vp_height);
 	cam->horizontal = vec_scale(cam->right, vp_width);
-	lower_left_corner = vec_subtract(vec_subtract(vec_add(cam->coords, vec_scale(cam->forward, focal_length)), 
+	lower_left_corner = vec_subtract(vec_subtract(vec_add(cam->coords, vec_scale(cam->forward, focal_length)),
 					vec_scale(cam->horizontal, 0.5)), vec_scale(cam->vertical, 0.5));
 	cam->llc = lower_left_corner;
 }
@@ -70,4 +70,20 @@ void	camera_prepare_orientation(t_camera	*cam, mlx_image_t *img)
 	up = vec_normalize(vec_cross(forward, right));
 	cam->up = up;
 	view_plane_calc(cam, img);
+}
+
+void	handle_camera_rotation(mlx_key_data_t keydata, t_scene *scene)
+{
+	if (keydata.key == MLX_KEY_UP)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.right, 0.05);
+	else if (keydata.key == MLX_KEY_DOWN)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.right, -0.05);
+	else if (keydata.key == MLX_KEY_RIGHT)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.up, 0.05);
+	else if (keydata.key == MLX_KEY_LEFT)
+		scene->camera.forward = vec_rotate(scene->camera.forward,
+				scene->camera.up, -0.05);
 }
