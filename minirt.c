@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:31:09 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/29 19:22:28 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 22:50:02 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,55 @@ void print_scene(const t_scene *scene) {
 		print_color(&cy->color, "  Color");
 		cy = cy->next;
 	}
+	// Cones
+	t_cone *co = scene->cones;
+	i = 0;
+	while (co) {
+		printf("Cone #%d:\n", i++);
+		print_coordinates(&co->apex, "  Apex");
+		print_coordinates(&co->axis, "  Axis");
+		printf("  Diameter: %.2f\n", co->diameter);
+		printf("  Height: %.2f\n", co->height);
+		print_color(&co->color, "  Color");
+		co = co->next;
+	}
 	printf("--- End Scene Debug Info ---\n");
 }
 
 #include "defines.h"
+
+void	free_scene(t_scene *scene)
+{
+	t_plane		*plane;
+	t_sphere	*sphere;
+	t_cylinder	*cylinder;
+	t_cone		*cone;
+	
+	while (scene->planes)
+	{
+		plane = scene->planes->next;
+		free(scene->planes);
+		scene->planes = plane;
+	}
+	while (scene->spheres)
+	{
+		sphere = scene->spheres->next;
+		free(scene->spheres);
+		scene->spheres = sphere;
+	}
+	while (scene->cylinders)
+	{
+		cylinder = scene->cylinders->next;
+		free(scene->cylinders);
+		scene->cylinders = cylinder;
+	}
+	while (scene->cones)
+	{
+		cone = scene->cones->next;
+		free(scene->cones);
+		scene->cones = cone;
+	}
+}
 
 int main(int argc, char **argv)
 {
@@ -83,8 +128,9 @@ int main(int argc, char **argv)
 
 	scene_init(&scene);
 	validate_and_parse(argc, argv, &scene);
-	create_window(&scene);
 	print_scene(&scene);
+	create_window(&scene);
+	free_scene(&scene);
 
 	return (0);
 }

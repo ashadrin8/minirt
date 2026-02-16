@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:54:15 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/07 22:41:11 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:29:38 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	scene_init(t_scene	*scene)
 	scene->spheres = NULL;
 	scene->planes = NULL;
 	scene->cylinders = NULL;
+	scene->cones = NULL;
 }
 
 int	plane_create(t_scene *scene)
@@ -67,5 +68,21 @@ int	cylinder_create(t_scene *scene)
 		scene->last_cylinder->next = cylinder;
 	scene->last_cylinder = cylinder;
 	cylinder->next = NULL;
+	return (SUCCESS);
+}
+
+int	cone_create(t_scene *scene)
+{
+	t_cone	*cone;
+
+	cone = malloc(sizeof(t_cone));
+	if (!cone)
+		return (ERROR);
+	if (scene->cones == NULL)
+		scene->cones = cone;
+	else
+		scene->last_cone->next = cone;
+	scene->last_cone = cone;
+	cone->next = NULL;
 	return (SUCCESS);
 }

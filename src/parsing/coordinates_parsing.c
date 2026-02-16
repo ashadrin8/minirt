@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:40:13 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/08 17:28:26 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:20:10 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ int	validate_and_store_coordinates(char *string, t_coordinates *coords)
 			i++;
 		len = i - start;
 		number = ft_substr(string, start, len);
-		printf("coordinates are as follows: %s, %s\n", string, number);
 		if (coord_assign(number, coords, position) == ERROR)
-			return (free(number), printf("ERROR ASSIGN\n"), ERROR);
+			return (free(number), ERROR);
 		free(number);
 		position++;
 		if (string[i] == ',')
@@ -69,7 +68,6 @@ int	validate_and_store_vector(char *string, t_coordinates *vector)
 
 	position = 1;
 	i = 0;
-	printf("was i here at all?\n");
 	while (position <= 3)
 	{
 		start = i;
@@ -78,14 +76,14 @@ int	validate_and_store_vector(char *string, t_coordinates *vector)
 		len = i - start;
 		number = ft_substr(string, start, len);
 		if (vector_assign(number, vector, position) == ERROR)
-			return (free(number), printf("no vector? huh?\n"), ERROR);
+			return (free(number), ERROR);
 		free(number);
 		position++;
 		if (string[i] == ',')
 			i++;
 	}
 	if (position != 4)
-		return (printf("position not 4\n"), ERROR);
+		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -96,14 +94,14 @@ int	vector_assign(char *number, t_coordinates *vector, int position)
 	if (position > 3)
 		return (ERROR);
 	if (ascii_to_double(number, &value) == ERROR)
-		return (printf("no ascii\n"), ERROR);
+		return (ERROR);
 	if (value < -1.0 || value > 1.0)
-		return (printf("AAAAAAA\n"), ERROR);
+		return (ERROR);
 	if (position == 1)
 		vector->x = value;
 	if (position == 2)
 		vector->y = value;
 	if (position == 3)
 		vector->z = value;
-	return (printf("SUCCESS!!\n"), SUCCESS);
+	return (SUCCESS);
 }

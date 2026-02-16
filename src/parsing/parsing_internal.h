@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 21:49:06 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/01/07 22:42:58 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 22:50:42 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,40 @@
 
 # include "defines.h"
 
-struct	s_parsing;
+struct		s_parsing;
 typedef int	(*t_validate_store_fn)(struct s_parsing *, t_scene *);
 
-typedef struct	s_parsing
+typedef struct s_parsing
 {
-	int 	i;
-	int		start;
-	int		position;
-	int		len;
-	double	number;
-	int		tot_pars;
-	char	*parameter;
-	t_validate_store_fn validate_store;
-	// t - type, fn - function
-	void	*current_object;
+	int					i;
+	int					start;
+	int					position;
+	int					len;
+	double				number;
+	int					tot_pars;
+	char				*parameter;
+	t_validate_store_fn	validate_store;
+	void				*current_object;
 }	t_parsing;
+//t - type, fn - function
 
-
-//validate and store objects
+//scene settings
 int		validate_store_ambient(t_parsing *p, t_scene *scene);
 int		validate_store_camera(t_parsing *p, t_scene *scene);
 int		validate_store_light(t_parsing *p, t_scene *scene);
+
+//objects
 int		validate_store_sphere(t_parsing *p, t_scene *scene);
 int		validate_store_plane(t_parsing *p, t_scene *scene);
 int		validate_store_cylinder(t_parsing *p, t_scene *scene);
+int		validate_store_cone(t_parsing *p, t_scene *scene);
 
 //init
 void	scene_init(t_scene	*scene);
 int		plane_create(t_scene *scene);
 int		sphere_create(t_scene *scene);
 int		cylinder_create(t_scene *scene);
+int		cone_create(t_scene *scene);
 
 //utils
 int		is_valid_rt(char *filename);
@@ -64,7 +67,7 @@ int		coord_assign(char *number, t_coordinates *coords, int position);
 int		validate_and_store_vector(char *string, t_coordinates *vector);
 int		vector_assign(char *number, t_coordinates *vector, int position);
 
-
+//general parser
 int		validate_and_parse(int argc, char **argv, t_scene *scene);
 int		parse_line(char *line, t_scene *scene);
 int		manage_geometric(char *line, t_scene *scene, t_parsing *p);

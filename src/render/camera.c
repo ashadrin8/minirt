@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 18:33:21 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/12 14:58:15 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/16 23:09:02 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,29 @@ t_ray	ray_create(t_scene *scene, mlx_image_t *img, size_t x, size_t y)
 	u = (double)x / (img->width - 1);
 	v = (double)y / (img->height - 1);
 	point_on_plane = vec_add(vec_add(scene->camera.llc,
-		vec_scale(scene->camera.horizontal, u)),
-		vec_scale(scene->camera.vertical, v));
-	ray.direction = vec_normalize(vec_subtract(point_on_plane, scene->camera.coords));
-	
+				vec_scale(scene->camera.horizontal, u)),
+			vec_scale(scene->camera.vertical, v));
+	ray.direction = vec_normalize(vec_subtract(point_on_plane,
+				scene->camera.coords));
 	return (ray);
 }
 
 void	view_plane_calc(t_camera *cam, mlx_image_t *img)
 {
-	double	aspect_ratio;
-	double	vp_height;
-	double	vp_width;
-	t_vec3	lower_left_corner;
-	double	focal_length;
-	double	theta;
+	t_camera_calc	c;
 
-	focal_length = 1.0;
-	aspect_ratio = (double)img->width / (double)img->height;
-	theta = cam->view * M_PI / 180.0;
-	vp_height = 2 * tan(theta / 2);
-	vp_width = aspect_ratio * vp_height;
-	cam->vertical = vec_scale(cam->up, vp_height);
-	cam->horizontal = vec_scale(cam->right, vp_width);
-	lower_left_corner = vec_subtract(vec_subtract(vec_add(cam->coords, vec_scale(cam->forward, focal_length)),
-					vec_scale(cam->horizontal, 0.5)), vec_scale(cam->vertical, 0.5));
-	cam->llc = lower_left_corner;
+	c.focal_length = 1.0;
+	c.aspect_ratio = (double)img->width / (double)img->height;
+	c.theta = cam->view * M_PI / 180.0;
+	c.vp_height = 2 * tan(c.theta / 2);
+	c.vp_width = c.aspect_ratio * c.vp_height;
+	cam->vertical = vec_scale(cam->up, c.vp_height);
+	cam->horizontal = vec_scale(cam->right, c.vp_width);
+	c.lower_left_corner = vec_subtract(vec_subtract(vec_add(cam->coords,
+					vec_scale(cam->forward, c.focal_length)),
+				vec_scale(cam->horizontal, 0.5)),
+			vec_scale(cam->vertical, 0.5));
+	cam->llc = c.lower_left_corner;
 }
 
 void	camera_prepare_orientation(t_camera	*cam, mlx_image_t *img)

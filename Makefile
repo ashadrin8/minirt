@@ -24,11 +24,13 @@ INCLUDES    = -I includes \
 SRC_FILES = \
 	minirt.c \
 	src/parsing/parsing.c \
+	src/parsing/parse_scene_settings.c \
 	src/parsing/parse_objects.c \
 	src/parsing/initialization.c \
 	src/parsing/color_parsing.c \
 	src/parsing/coordinates_parsing.c \
 	src/parsing/utils.c \
+	src/parsing/utils2.c \
 	src/render/render_scene.c \
 	src/render/camera.c \
 	src/render/window.c \
@@ -40,6 +42,7 @@ SRC_FILES = \
 	src/render/cylinder.c \
 	src/render/cylinder_side.c \
 	src/render/cylinder_utils.c \
+	src/render/cone.c \
 	src/vector_math/vector_math.c \
 	libft/gnl/get_next_line.c \
 	libft/gnl/get_next_line_utils.c
