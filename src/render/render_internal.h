@@ -115,17 +115,21 @@ int				hit_closest_cylinder(t_ray ray, t_cylinder *cylinders,
 					t_hit *hit, double *closest);
 int				hit_cylinder_side(t_ray ray, t_cylinder *cy, double *t);
 int				solve_quadratic(t_coordinates d, t_coordinates oc,
-				double r, double *t);
+					double r, double *t);
 t_coordinates	compute_side_normal(t_ray r, t_cylinder *cy, double t);
 void			set_cap_hit(t_cap_hit *cap, int top, double t);
 int				find_closest_hit(double t_side, t_cap_hit cap0,
 					t_cap_hit cap1, double *closest_t);
 void			update_hit(t_hit *hit, t_ray ray, t_cylinder *cy,
 					t_cyl_hits hits);
-int 			hit_closest_sphere(t_ray ray, t_sphere *spheres, t_hit *hit, double *closest);
-int				hit_closest_plane(t_ray ray, t_plane *planes, t_hit *hit, double *closest);
-int				hit_closest_cylinder(t_ray ray, t_cylinder *cylinders, t_hit *hit, double *closest);
-int				hit_closest_cone(t_ray ray, t_cone *cones, t_hit *hit, double *closest);
+int				hit_closest_sphere(t_ray ray, t_sphere *spheres,
+					t_hit *hit, double *closest);
+int				hit_closest_plane(t_ray ray, t_plane *planes,
+					t_hit *hit, double *closest);
+int				hit_closest_cylinder(t_ray ray, t_cylinder *cylinders,
+					t_hit *hit, double *closest);
+int				hit_closest_cone(t_ray ray, t_cone *cones,
+					t_hit *hit, double *closest);
 
 // lights
 t_color			shade_hit(t_scene *scene, t_hit *hit);
@@ -138,7 +142,7 @@ void			handle_camera_rotation(mlx_key_data_t keydata,
 
 // utils
 uint32_t		rgba(int r, int g, int b, int a);
-int 			clamp(int value);
+int				clamp(int value);
 t_coordinates	ray_at(t_ray ray, double t);
 int				estimate_ts(t_cone_hit *hit, double *t_out);
 

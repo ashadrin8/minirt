@@ -37,14 +37,14 @@ void	keys(mlx_key_data_t keydata, void *con)
 	t_mlx_context	*ctx;
 
 	ctx = (t_mlx_context *)con;
-	if (keydata.key == MLX_KEY_ESCAPE 
-			&& keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_ESCAPE
+		&& keydata.action == MLX_PRESS)
 	{
 		free_scene(ctx->scene);
 		mlx_close_window(ctx->mlx);
 	}
 	else if (keydata.key == MLX_KEY_UP
-			&& keydata.action == MLX_PRESS)
+		&& keydata.action == MLX_PRESS)
 		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.right, 0.05);
 	else if (keydata.key == MLX_KEY_DOWN
 			&& keydata.action == MLX_PRESS)
@@ -54,10 +54,9 @@ void	keys(mlx_key_data_t keydata, void *con)
 		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.up, 0.05);
 	else if (keydata.key == MLX_KEY_LEFT
 			&& keydata.action == MLX_PRESS)
-		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.up, -0.05); 
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.up, -0.05);
 	camera_prepare_orientation(&ctx->scene->camera, ctx->img);
 	render_scene(ctx->scene, ctx->img);
-	
 }
 
 void	closing(void *con)
