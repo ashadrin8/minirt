@@ -19,6 +19,9 @@ static int	hit_sphere(t_ray ray, t_sphere *sphere, double *t_out)
 	double			b;
 	double			c;
 	double			intersect;
+	double			sqrt_disc;
+	double			t0;
+	double			t1;
 
 	oc.x = ray.origin.x - sphere->center.x;
 	oc.y = ray.origin.y - sphere->center.y;
@@ -29,8 +32,14 @@ static int	hit_sphere(t_ray ray, t_sphere *sphere, double *t_out)
 	intersect = b * b - 4 * a * c;
 	if (intersect < 0)
 		return (0);
-	*t_out = (-b - sqrt(intersect)) / (2 * a);
-	if (*t_out <= 0)
+	sqrt_disc = sqrt(intersect);
+	t0 = (-b - sqrt_disc) / (2 * a);
+	t1 = (-b + sqrt_disc) / (2 * a);
+	if (t0 > EPS)
+		*t_out = t0;
+	else if (t1 > EPS)
+		*t_out = t1;
+	else
 		return (0);
 	return (1);
 }

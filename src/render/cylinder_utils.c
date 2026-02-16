@@ -36,10 +36,12 @@ t_coordinates	compute_side_normal(t_ray r, t_cylinder *cy, double t)
 {
 	t_coordinates	p;
 	t_coordinates	proj;
+	t_coordinates	axis;
 
+	axis = vec_normalize(cy->vector);
 	p = vec_add(r.origin, vec_scale(r.direction, t));
-	proj = vec_add(cy->center, vec_scale(cy->vector,
-				vec_dot(vec_subtract(p, cy->center), cy->vector)));
+	proj = vec_add(cy->center, vec_scale(axis,
+				vec_dot(vec_subtract(p, cy->center), axis)));
 	return (vec_normalize(vec_subtract(p, proj)));
 }
 
@@ -72,22 +74,17 @@ int	find_closest_hit(double t_side, t_cap_hit cap0,
 
 void	update_hit(t_hit *hit, t_ray ray, t_cylinder *cy, t_cyl_hits hits)
 {
-	t_coordinates	normal;
+	t_coordinates	axis;
 
+	axis = vec_normalize(cy->vector);
 	hit->type = OBJ_CYLINDER;
 	hit->obj = cy;
 	hit->t = hits.closest_t;
 	hit->point = vec_add(ray.origin, vec_scale(ray.direction, hits.closest_t));
-	if (hits.cap0.hit && hits.closest_t == hits.cap0.t)
-		hit->normal = vec_scale(cy->vector, -1.0);
-	else if (hits.cap1.hit && hits.closest_t == hits.cap1.t)
-		hit->normal = cy->vector;
+	if (hits.cap0.hit && fabs(hits.closest_t - hits.cap0.t) <= EPS)
+		hit->normal = vec_scale(axis, -1.0);
+	else if (hits.cap1.hit && fabs(hits.closest_t - hits.cap1.t) <= EPS)
+		hit->normal = axis;
 	else
-	{
-		normal = compute_side_normal(ray, cy, hits.closest_t);
-		if (vec_dot(normal, ray.direction) > 0)
-			hit->normal = vec_scale(normal, -1.0);
-		else
-			hit->normal = normal;
-	}
+		hit->normal = compute_side_normal(ray, cy, hits.closest_t);
 }

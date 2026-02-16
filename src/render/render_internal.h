@@ -55,6 +55,16 @@ typedef struct s_hit
 	double			t;
 }	t_hit;
 
+typedef struct s_shadow_ctx
+{
+	t_ray			shadow;
+	t_hit			tmp;
+	t_coordinates	light_dir;
+	double			closest;
+	double			light_dist2;
+	double			traveled;
+}	t_shadow_ctx;
+
 typedef struct s_mlx_context
 {
 	mlx_t		*mlx;
