@@ -6,11 +6,11 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 14:44:56 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/17 00:09:32 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 12:07:43 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_internal.h"
+#include "objects_internal.h"
 
 static void	setup_sphere_eq(t_ray ray, t_sphere *sphere, t_sphere_eq *eq)
 {

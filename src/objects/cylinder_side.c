@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_side.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 00:10:00 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/17 00:10:00 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 12:08:31 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_internal.h"
+#include "objects_internal.h"
 
 static int	valid_side_hit(t_ray ray, t_cylinder *cy, t_coordinates axis,
 	double t)

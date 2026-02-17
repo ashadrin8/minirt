@@ -6,11 +6,11 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 18:58:42 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/16 23:06:18 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/17 12:15:35 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_internal.h"
+#include "objects_internal.h"
 
 int	hit_cone_base(t_ray ray, t_cone *cone, t_vec3 axis, double *t_out)
 {
@@ -44,20 +44,20 @@ static int	hit_cone_side(t_ray ray, t_cone *cone,
 	hit.oc = vec_subtract(ray.origin, cone->apex);
 	hit.m = vec_dot(ray.direction, axis);
 	hit.n = vec_dot(hit.oc, axis);
-	hit.A = vec_dot(ray.direction, ray.direction)
+	hit.a = vec_dot(ray.direction, ray.direction)
 		- (1 + cone->slope) * hit.m * hit.m;
-	hit.B = 2 * (vec_dot(ray.direction, hit.oc)
+	hit.b = 2 * (vec_dot(ray.direction, hit.oc)
 			- (1 + cone->slope) * hit.m * hit.n);
-	hit.C = vec_dot(hit.oc, hit.oc) - (1 + cone->slope) * hit.n * hit.n;
-	hit.discriminant = hit.B * hit.B - 4 * hit.A * hit.C;
+	hit.c = vec_dot(hit.oc, hit.oc) - (1 + cone->slope) * hit.n * hit.n;
+	hit.discriminant = hit.b * hit.b - 4 * hit.a * hit.c;
 	if (hit.discriminant < 0)
 		return (0);
-	hit.t0 = ((hit.B * -1) - sqrt(hit.discriminant)) / (2 * hit.A);
-	hit.t1 = ((hit.B * -1) + sqrt(hit.discriminant)) / (2 * hit.A);
+	hit.t0 = ((hit.b * -1) - sqrt(hit.discriminant)) / (2 * hit.a);
+	hit.t1 = ((hit.b * -1) + sqrt(hit.discriminant)) / (2 * hit.a);
 	if (estimate_ts(&hit, t_out))
 	{
-		hit.P = ray_at(ray, *t_out);
-		m = vec_dot(vec_subtract(hit.P, cone->apex), axis);
+		hit.p = ray_at(ray, *t_out);
+		m = vec_dot(vec_subtract(hit.p, cone->apex), axis);
 		if (m < 0 || m > cone->height)
 			return (0);
 		return (1);
