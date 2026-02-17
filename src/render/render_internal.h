@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 10:00:00 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/17 00:09:23 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 11:30:33 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

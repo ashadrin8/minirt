@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 20:12:34 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/16 23:03:04 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 11:04:07 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	cast_shadow_ray(t_scene *scene, t_ray shadow, t_hit *tmp,
 	hit_closest_sphere(shadow, scene->spheres, tmp, closest);
 	hit_closest_plane(shadow, scene->planes, tmp, closest);
 	hit_closest_cylinder(shadow, scene->cylinders, tmp, closest);
+	hit_closest_cone(shadow, scene->cones, tmp, closest);
 }
 
 static void	setup_shadow_ctx(t_scene *scene, t_hit *hit, t_shadow_ctx *ctx)

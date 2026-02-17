@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:31:09 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/16 22:50:02 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:07:07 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ int main(int argc, char **argv)
 	t_scene	scene;
 
 	scene_init(&scene);
-	validate_and_parse(argc, argv, &scene);
+	if (validate_and_parse(argc, argv, &scene) == ERROR)
+		return (free_scene(&scene), 1);
 	print_scene(&scene);
 	create_window(&scene);
 	free_scene(&scene);

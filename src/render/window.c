@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:29:03 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/16 16:52:12 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:38:44 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,17 @@ void	keys(mlx_key_data_t keydata, void *con)
 	}
 	else if (keydata.key == MLX_KEY_UP
 		&& keydata.action == MLX_PRESS)
-		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.right, 0.05);
-	else if (keydata.key == MLX_KEY_DOWN
-			&& keydata.action == MLX_PRESS)
-		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.right, -0.05);
-	else if (keydata.key == MLX_KEY_RIGHT
-			&& keydata.action == MLX_PRESS)
-		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.up, 0.05);
-	else if (keydata.key == MLX_KEY_LEFT
-			&& keydata.action == MLX_PRESS)
-		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward, ctx->scene->camera.up, -0.05);
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward,
+				ctx->scene->camera.right, 0.05);
+	else if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward,
+				ctx->scene->camera.right, -0.05);
+	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward,
+				ctx->scene->camera.up, 0.05);
+	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		ctx->scene->camera.forward = vec_rotate(ctx->scene->camera.forward,
+				ctx->scene->camera.up, -0.05);
 	camera_prepare_orientation(&ctx->scene->camera, ctx->img);
 	render_scene(ctx->scene, ctx->img);
 }
