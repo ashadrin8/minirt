@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/16 20:12:56 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:52:28 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,20 +119,6 @@ struct  s_cone
 	t_color			color;
     t_cone          *next;
 }; 
-
-typedef struct  c_cone_hit
-{
-    t_vec3  oc;
-    double  m;
-    double  n;
-    double  A;
-    double  B;
-    double  C;
-    double  discriminant;
-    double  t0;
-    double  t1;
-	t_vec3	P;
-}   t_cone_hit;
 
 typedef struct s_scene
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 15:11:36 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/02/17 00:00:21 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 12:08:08 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_internal.h"
+#include "objects_internal.h"
 
 static int	hit_cap(t_ray ray, t_cylinder *cy, int top, double *t_out)
 {

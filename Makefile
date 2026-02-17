@@ -37,13 +37,15 @@ SRC_FILES = \
 	src/render/utils.c \
 	src/render/light.c \
 	src/render/shadow.c \
-	src/render/sphere.c \
-	src/render/plane.c \
-	src/render/cylinder.c \
-	src/render/cylinder_side.c \
-	src/render/cylinder_utils.c \
-	src/render/cone.c \
+	src/objects/sphere.c \
+	src/objects/plane.c \
+	src/objects/cylinder.c \
+	src/objects/cylinder_side.c \
+	src/objects/cylinder_utils.c \
+	src/objects/cone.c \
+	src/objects/cone_util.c \
 	src/vector_math/vector_math.c \
+	src/vector_math/vector_math2.c \
 	libft/gnl/get_next_line.c \
 	libft/gnl/get_next_line_utils.c
 

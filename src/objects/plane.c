@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chiarakappe <chiarakappe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:57:15 by chiarakappe       #+#    #+#             */
-/*   Updated: 2026/01/27 19:59:15 by chiarakappe      ###   ########.fr       */
+/*   Updated: 2026/02/17 12:07:58 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_internal.h"
+#include "objects_internal.h"
 
 static int	hit_plane(t_ray ray, t_plane *pl, double *t_out)
 {
