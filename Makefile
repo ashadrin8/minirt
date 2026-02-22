@@ -46,6 +46,7 @@ SRC_FILES = \
 	src/objects/cone_util.c \
 	src/vector_math/vector_math.c \
 	src/vector_math/vector_math2.c \
+	src/cleaning/cleaning.c \
 	libft/gnl/get_next_line.c \
 	libft/gnl/get_next_line_utils.c
 
