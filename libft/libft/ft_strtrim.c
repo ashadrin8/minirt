@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ashadrin <ashadrin@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 22:13:16 by ashadrin          #+#    #+#             */
-/*   Updated: 2025/07/19 15:09:39 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:25:14 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	trimming(char const *s1, char const *set)
 
 	i = 0;
 	len = 0;
-	while (in_set(set, s1[i]) == 1)
+	while (s1[i] != '\0' && in_set(set, s1[i]) == 1)
 		i++;
 	while (s1[len] != '\0')
 		len++;
@@ -48,7 +48,7 @@ static int	start(char const *s1, char const *set)
 	int	i;
 
 	i = 0;
-	while (in_set(set, s1[i]) == 1)
+	while (s1[i] != '\0' && in_set(set, s1[i]) == 1)
 		i++;
 	return (i);
 }
