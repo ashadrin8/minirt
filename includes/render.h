@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:56:36 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/17 12:09:18 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:35:25 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_hit
 	t_coordinates	normal;
 	double			t;
 }	t_hit;
-
 
 t_coordinates	ray_at(t_ray ray, double t);
 

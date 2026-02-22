@@ -6,7 +6,7 @@
 /*   By: ashadrin <ashadrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 21:35:19 by ashadrin          #+#    #+#             */
-/*   Updated: 2026/02/17 11:52:28 by ashadrin         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:40:57 by ashadrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,30 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-typedef struct	s_color
+typedef struct s_color
 {
 	int	red;
 	int	green;
 	int	blue;
 }	t_color;
 
-typedef struct	s_coordinates
+typedef struct s_coordinates
 {
 	double	x;
 	double	y;
 	double	z;
 }	t_coordinates;
 
-typedef t_coordinates t_vec3;
+typedef t_coordinates		t_vec3;
 
-typedef struct	s_am_light
+typedef struct s_am_light
 {
 	int		exists;
 	double	ratio;
 	t_color	colors;	
 }	t_am_light;
 
-typedef struct	s_camera
+typedef struct s_camera
 {
 	int				exists;
 	t_coordinates	coords;
@@ -70,7 +70,7 @@ typedef struct	s_camera
 	t_vec3			llc;
 }	t_camera;
 
-typedef struct	s_light
+typedef struct s_light
 {
 	int				exists;
 	t_coordinates	coords;
@@ -78,7 +78,7 @@ typedef struct	s_light
 	t_color			color;
 }	t_light;
 
-typedef struct s_sphere t_sphere;
+typedef struct s_sphere		t_sphere;
 struct	s_sphere
 {
 	t_coordinates	center;
@@ -87,7 +87,7 @@ struct	s_sphere
 	t_sphere		*next;
 };
 
-typedef struct	s_plane t_plane;
+typedef struct s_plane		t_plane;
 struct	s_plane
 {
 	t_coordinates	point;
@@ -96,7 +96,7 @@ struct	s_plane
 	t_plane			*next;
 };
 
-typedef struct	s_cylinder t_cylinder;
+typedef struct s_cylinder	t_cylinder;
 struct	s_cylinder
 {
 	t_coordinates	center;
@@ -107,18 +107,18 @@ struct	s_cylinder
 	t_cylinder		*next;
 };
 
-typedef struct  s_cone t_cone;
-struct  s_cone
+typedef struct s_cone		t_cone;
+struct	s_cone
 {
-    t_coordinates   apex;
-    t_vec3          axis;
-    double          height;
-    double          diameter;
-    double          radius;
-    double          slope;
+	t_coordinates	apex;
+	t_vec3			axis;
+	double			height;
+	double			diameter;
+	double			radius;
+	double			slope;
 	t_color			color;
-    t_cone          *next;
-}; 
+	t_cone			*next;
+};
 
 typedef struct s_scene
 {
